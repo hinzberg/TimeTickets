@@ -5,8 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimeTickets"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="Time Tickets" Height="450" Width="800">
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <!--Toolbar-->
+        <Grid Grid.Row="0">
+            <DockPanel Style="{StaticResource ButtonBarStyle}">
+                <Button HorizontalAlignment="Right" Margin="5" Name="NewTaskButton" Command="{Binding NewTaskCommand}">
+                    <TextBlock Style="{StaticResource ButtonTextStyle}" Text="New Task" Margin="10,0,10,0"/>
+                </Button>
+                <Button HorizontalAlignment="Right" Margin="5" Name="ClearAllButton" Command="{Binding ClearAllCommand}">
+                    <TextBlock Style="{StaticResource ButtonTextStyle}" Text="Clear All" Margin="10,0,10,0" />
+                </Button>
+            </DockPanel>
+        </Grid>
         
+        <!--ListView-->
+        
+
+
+        <!--Statusbar-->
+        <Grid Grid.Row="2">
+            <DockPanel Style="{StaticResource ButtonBarStyle}">
+                <TextBlock Style="{StaticResource HeaderStyle}" Text="Total Time" Margin="10,10,10,0" />
+            </DockPanel>
+        </Grid>
     </Grid>
+
 </Window>
