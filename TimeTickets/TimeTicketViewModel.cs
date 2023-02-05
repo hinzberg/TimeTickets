@@ -1,17 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 using WPFToolkit;
 
 namespace TimeTickets
 {
-    class TimeTicketViewModel
+    public class TimeTicketViewModel : ViewModelBase
     {
-        public string DurationTime { get; set; }
-        public string Description { get; set; }
+        private string _durationTime;
+        private string _description;
+        private DispatcherTimer _dispatcherTimer;
+        private DateTime _startTime;
+        private long _runSeconds;
+
+        public string DurationTime
+        {
+            get { return _durationTime; }
+            set
+            {
+                _durationTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                OnPropertyChanged();
+            }
+        }
 
         public bool CanPause => true; // always
         private ICommand _pauseCommand;
@@ -31,28 +56,46 @@ namespace TimeTickets
 
         public TimeTicketViewModel()
         {
-            this.DurationTime = "00:00:00";
-            this.Description = "My new Task";
+            _dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            _dispatcherTimer.Tick += new EventHandler(OnDispatcherTimerTick);
+            _dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            DurationTime = "00:00:00";
+            Description = "Edit Description";
+        }
+
+        public void Start()
+        {
+            _startTime = DateTime.Now;
+            _dispatcherTimer.Start();
+        }
+
+        private void OnDispatcherTimerTick(object sender, EventArgs e)
+        {
+            TimeSpan ts = DateTime.Now - _startTime;
+            DurationTime = ts.ToString(@"hh\:mm\:ss");
+        }
+
+        public void Stop()
+        {
+            _dispatcherTimer.Stop();
         }
 
         private void PauseAction()
         {
-
+            this.Stop();
         }
 
         private void RunAction()
         {
-
+            this.Start();
         }
 
         private void EditAction()
         {
-
         }
 
         private void DeleteAction()
         {
-
         }
     }
 }

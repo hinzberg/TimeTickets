@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Time Tickets" Height="450" Width="800">
-    
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -36,10 +36,42 @@
                 </Button>
             </DockPanel>
         </Grid>
-        
-        <!--ListView-->
-        
 
+        <!--ListView-->
+        <ListBox Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding Path=TimeTickets}" Grid.Row="1" SelectedItem="{Binding Path=SelectedTimeTicketVM, Mode=TwoWay}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="80"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel  Grid.Column="0"    Orientation="Vertical" Margin="5,0,0,0">
+                            <TextBlock Style="{StaticResource HeaderStyle}" Text="{Binding Path=DurationTime}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding Path=Description}"/>
+                        </StackPanel>
+                        <Button  Grid.Column="1" Margin="2"  Name="PauseButton" Command="{Binding PauseCommand}">
+                            <TextBlock Style="{StaticResource ButtonTextStyle}" Text="Pause" Margin="10"/>
+                        </Button>
+                        <Button  Grid.Column="2" Margin="2" Name="ResumeButton" Command="{Binding RunCommand}">
+                            <TextBlock Style="{StaticResource ButtonTextStyle}" Text="Resume" Margin="10"/>
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+            <!--<ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Remove Person" Command="{Binding DeletePersonCommand}"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>-->
+        </ListBox>
 
         <!--Statusbar-->
         <Grid Grid.Row="2">
