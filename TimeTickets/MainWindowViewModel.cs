@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 using WPFToolkit;
 
 namespace TimeTickets
@@ -13,7 +11,8 @@ namespace TimeTickets
     {
         public ObservableCollection<TimeTicketViewModel> TimeTickets { get; set; }
         public TimeTicketViewModel SelectedTimeTicketVM { get; set; }
-        public TimeTicketViewModel CurrentlyRunningTimeTicketVM { get; set; }
+
+        private DispatcherTimer _dispatcherTimer;
 
         public bool CanExecuteClearAll => true; // always
         private ICommand _clearAllCommand;
@@ -23,9 +22,31 @@ namespace TimeTickets
         private ICommand _newTaskCommand;
         public ICommand NewTaskCommand => _newTaskCommand ?? (_newTaskCommand = new CommandHandler(NewTaskAction, () => CanExecuteNewTask));
 
+        private string _totalDurationTime;
+        public string TotalDurationTime
+        {
+            get { return _totalDurationTime; }
+            set
+            {
+                _totalDurationTime = value;
+                OnPropertyChanged();
+            }
+        }
+
         public MainWindowViewModel()
         {
             this.TimeTickets = new ObservableCollection<TimeTicketViewModel>();
+            _dispatcherTimer = new DispatcherTimer();
+            _dispatcherTimer.Tick += new EventHandler(OnDispatcherTimerTick);
+            _dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            _dispatcherTimer.Start();
+        }
+
+        private void OnDispatcherTimerTick(object sender, EventArgs e)
+        {
+            int allElapsedSeconds = TimeTickets.Sum(a => a.TotalElapsedSeconds);
+            TimeSpan ts = new TimeSpan(0, 0, 0, allElapsedSeconds, 0);
+            TotalDurationTime = ts.ToString(@"hh\:mm\:ss");
         }
 
         private void ClearAllAction()
@@ -35,17 +56,13 @@ namespace TimeTickets
             foreach (var timeTicket in TimeTickets)
                 timeTicket.Stop();
 
-            TimeTickets.Clear();            
+            TimeTickets.Clear();
         }
 
         private void NewTaskAction()
         {
-            if (this.CurrentlyRunningTimeTicketVM != null)
-                this.CurrentlyRunningTimeTicketVM.Stop();
-
-            var ticket = new TimeTicketViewModel();
+            var ticket = new TimeTicketViewModel(this.TimeTickets);
             ticket.Start();
-            this.CurrentlyRunningTimeTicketVM = ticket;
             this.TimeTickets.Insert(0, ticket);
         }
     }

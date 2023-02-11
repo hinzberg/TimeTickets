@@ -16,8 +16,6 @@
         </ResourceDictionary>
     </Window.Resources>
 
-
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -68,15 +66,16 @@
 
             <!--<ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Remove Person" Command="{Binding DeletePersonCommand}"/>
+                    <MenuItem Header="Remove Person" Command="{Binding DeleteCommand}"/>
                 </ContextMenu>
             </ListBox.ContextMenu>-->
+            
         </ListBox>
 
         <!--Statusbar-->
         <Grid Grid.Row="2">
             <DockPanel Style="{StaticResource ButtonBarStyle}">
-                <TextBlock Style="{StaticResource HeaderStyle}" Text="Total Time" Margin="10,10,10,0" />
+                <TextBlock Style="{StaticResource HeaderStyle}" Margin="10,10,0,0" Text="{Binding Path=TotalDurationTime}"/>
             </DockPanel>
         </Grid>
     </Grid>
