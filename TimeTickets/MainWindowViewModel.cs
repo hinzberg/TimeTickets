@@ -9,10 +9,9 @@ namespace TimeTickets
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private DispatcherTimer _dispatcherTimer;
         public ObservableCollection<TimeTicketViewModel> TimeTickets { get; set; }
         public TimeTicketViewModel SelectedTimeTicketVM { get; set; }
-
-        private DispatcherTimer _dispatcherTimer;
 
         public bool CanExecuteClearAll => true; // always
         private ICommand _clearAllCommand;
@@ -21,6 +20,14 @@ namespace TimeTickets
         public bool CanExecuteNewTask => true; // always
         private ICommand _newTaskCommand;
         public ICommand NewTaskCommand => _newTaskCommand ?? (_newTaskCommand = new CommandHandler(NewTaskAction, () => CanExecuteNewTask));
+
+        public bool CanExecuteRenameTask => SelectedTimeTicketVM != null;
+        private ICommand _renameTaskCommand;
+        public ICommand RenameTaskCommand => _renameTaskCommand ?? (_renameTaskCommand = new CommandHandler(RenameAction, () => true));
+
+        public bool CanDeleteTask => SelectedTimeTicketVM != null;
+        private ICommand _deleteTaskCommand;
+        public ICommand DeleteTaskCommand => _deleteTaskCommand ?? (_deleteTaskCommand = new CommandHandler(DeleteAction, () => true));
 
         private string _totalDurationTime;
         public string TotalDurationTime
@@ -64,6 +71,18 @@ namespace TimeTickets
             var ticket = new TimeTicketViewModel(this.TimeTickets);
             ticket.Start();
             this.TimeTickets.Insert(0, ticket);
+        }
+
+        private void RenameAction()
+        {
+            RenameTimeTicketWindow vm = new RenameTimeTicketWindow(SelectedTimeTicketVM);
+            vm.ShowDialog();
+        }
+
+        private void DeleteAction()
+        {
+            this.SelectedTimeTicketVM.Stop();
+            this.TimeTickets.Remove(this.SelectedTimeTicketVM);
         }
     }
 }

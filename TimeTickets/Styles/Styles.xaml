@@ -19,8 +19,12 @@
         <Setter Property="Margin" Value="4"/>
     </Style>
 
-    <Style TargetType="DockPanel" x:Key="ButtonBarStyle">
+    <Style TargetType="DockPanel" x:Key="ButtonBarDockPanelStyle">
         <Setter Property="Background" Value="#f0f0f8"/>
+    </Style>
+
+    <Style TargetType="DockPanel" x:Key="ContentDockPanelStyle">
+        <Setter Property="Background" Value="White"/>
     </Style>
 
     <!--<Style TargetType="{x:Type Image}" x:Key="GenderImage">

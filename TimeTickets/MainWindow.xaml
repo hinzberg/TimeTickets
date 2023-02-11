@@ -25,7 +25,7 @@
 
         <!--Toolbar-->
         <Grid Grid.Row="0">
-            <DockPanel Style="{StaticResource ButtonBarStyle}">
+            <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}">
                 <Button HorizontalAlignment="Right" Margin="5" Name="NewTaskButton" Command="{Binding NewTaskCommand}">
                     <TextBlock Style="{StaticResource ButtonTextStyle}" Text="New Task" Margin="10,0,10,0"/>
                 </Button>
@@ -64,17 +64,18 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
 
-            <!--<ListBox.ContextMenu>
+            <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Remove Person" Command="{Binding DeleteCommand}"/>
+                    <MenuItem Header="Edit Task Description" Command="{Binding RenameTaskCommand}"/>
+                    <MenuItem Header="Delete Task" Command="{Binding DeleteTaskCommand}"/>
                 </ContextMenu>
-            </ListBox.ContextMenu>-->
+            </ListBox.ContextMenu>
             
         </ListBox>
 
         <!--Statusbar-->
         <Grid Grid.Row="2">
-            <DockPanel Style="{StaticResource ButtonBarStyle}">
+            <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}">
                 <TextBlock Style="{StaticResource HeaderStyle}" Margin="10,10,0,0" Text="{Binding Path=TotalDurationTime}"/>
             </DockPanel>
         </Grid>
