@@ -52,10 +52,6 @@ namespace TimeTickets
         private ICommand _runCommand;
         public ICommand RunCommand => _runCommand ?? (_runCommand = new CommandHandler(RunAction, () => CanRun));
 
-        public bool CanDelete => true; // always
-        private ICommand _deleteCommand;
-        public ICommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new CommandHandler(DeleteAction, () => CanDelete));
-
         public bool CanEdit => true; // always
         private ICommand _editCommand;
         public ICommand EditCommand => _editCommand ?? (_editCommand = new CommandHandler(EditAction, () => CanEdit));
@@ -117,10 +113,6 @@ namespace TimeTickets
         }
 
         private void EditAction()
-        {
-        }
-
-        private void DeleteAction()
         {
         }
     }
