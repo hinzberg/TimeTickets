@@ -68,6 +68,9 @@
     <Compile Include="RenameTimeTicketWindowViewModel.cs" />
     <Compile Include="RepositoryCollection.cs" />
     <Compile Include="TimeTicketViewModel.cs" />
+    <Compile Include="CustomControls\WindowCloseButtonsUserControl.xaml.cs">
+      <DependentUpon>WindowCloseButtonsUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPFToolkit\CommandHandler.cs" />
     <Compile Include="WPFToolkit\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
@@ -93,6 +96,10 @@
     <Page Include="Styles\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomControls\WindowCloseButtonsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

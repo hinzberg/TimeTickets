@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Threading;
+using TimeTickets.RecuringTasks;
 using WPFToolkit;
 
 namespace TimeTickets
@@ -91,7 +92,8 @@ namespace TimeTickets
 
         private void ManageRecuringTasksAction()
         {
-
+            RecuringTasksWindow window = new RecuringTasksWindow();
+            window.ShowDialog();
         }
     }
 }

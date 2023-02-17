@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="TimeTickets.WindowCloseButtonsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TimeTickets"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}" LastChildFill="False">
+        <Button DockPanel.Dock="Right" Margin="5" Command="{Binding CancelWindowCommand}">
+            <TextBlock Style="{StaticResource ButtonTextStyle}" Text="Cancel" Margin="10,0,10,0" />
+        </Button>
+        <Button DockPanel.Dock="Right" Margin="5" Command="{Binding SubmitWindowCommand}">
+            <TextBlock Style="{StaticResource ButtonTextStyle}" Text="Submit" Margin="10,0,10,0"/>
+        </Button>
+    </DockPanel>
+
+</UserControl>

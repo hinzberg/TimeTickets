@@ -4,9 +4,42 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimeTickets.RecuringTasks"
+        xmlns:custom="clr-namespace:TimeTickets"
         mc:Ignorable="d"
-        Title="RecuringTasksWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="Manage Recuring Tasks" Height="450" Width="800">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <!--ListView-->
+        <ListBox Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding Path=RecuringTasks}" Grid.Row="0" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Style="{StaticResource HeaderStyle}" Text="{Binding Path=Description}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <custom:WindowCloseButtonsUserControl Grid.Row="1"/>
+
     </Grid>
 </Window>
