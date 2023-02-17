@@ -5,6 +5,12 @@
     <BitmapImage x:Key="Woman" UriSource="woman.png" />
     <BitmapImage x:Key="Other" UriSource="other.png" />-->
 
+    <Style TargetType="TextBlock" x:Key="MenuItemTextStyle">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="11pt"/>
+        <Setter Property="Margin" Value="3"/>
+    </Style>
+
     <Style TargetType="TextBlock" x:Key="HeaderStyle">
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontSize" Value="12pt"/>

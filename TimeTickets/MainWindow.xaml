@@ -18,13 +18,32 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
+        <Menu Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <MenuItem>
+                <MenuItem.Header>
+                    <TextBlock Style="{StaticResource MenuItemTextStyle}" Text="File"/>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem>
+                <MenuItem.Header>
+                    <TextBlock Style="{StaticResource MenuItemTextStyle}" Text="Manage"/>
+                </MenuItem.Header>
+                <MenuItem Command="{Binding ManageRecuringTasksCommand}">
+                    <MenuItem.Header>
+                        <TextBlock Style="{StaticResource MenuItemTextStyle}" Text="Recuring Tasks"/>
+                    </MenuItem.Header>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
         <!--Toolbar-->
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="1">
             <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}">
                 <Button HorizontalAlignment="Right" Margin="5" Name="NewTaskButton" Command="{Binding NewTaskCommand}">
                     <TextBlock Style="{StaticResource ButtonTextStyle}" Text="New Task" Margin="10,0,10,0"/>
@@ -36,7 +55,7 @@
         </Grid>
 
         <!--ListView-->
-        <ListBox Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding Path=TimeTickets}" Grid.Row="1" SelectedItem="{Binding Path=SelectedTimeTicketVM, Mode=TwoWay}">
+        <ListBox Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding Path=TimeTickets}" Grid.Row="2" SelectedItem="{Binding Path=SelectedTimeTicketVM, Mode=TwoWay}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -74,7 +93,7 @@
         </ListBox>
 
         <!--Statusbar-->
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}">
                 <TextBlock Style="{StaticResource HeaderStyle}" Margin="10,10,0,0" Text="{Binding Path=TotalDurationTime}"/>
             </DockPanel>

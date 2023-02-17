@@ -54,11 +54,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="RecuringTasks\RecuringTask.cs" />
+    <Compile Include="RecuringTasks\RecuringTasksRepository.cs" />
+    <Compile Include="RecuringTasks\RecuringTasksWindow.xaml.cs">
+      <DependentUpon>RecuringTasksWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RecuringTasks\RecuringTasksWindowViewModel.cs" />
     <Compile Include="RenameTimeTicketWindow.xaml.cs">
       <DependentUpon>RenameTimeTicketWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RenameTimeTicketWindowViewModel.cs" />
+    <Compile Include="RepositoryCollection.cs" />
     <Compile Include="TimeTicketViewModel.cs" />
     <Compile Include="WPFToolkit\CommandHandler.cs" />
     <Compile Include="WPFToolkit\ViewModelBase.cs" />
@@ -74,6 +82,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RecuringTasks\RecuringTasksWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RenameTimeTicketWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

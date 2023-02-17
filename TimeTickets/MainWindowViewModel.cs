@@ -28,6 +28,10 @@ namespace TimeTickets
         public bool CanDeleteTask => SelectedTimeTicketVM != null;
         private ICommand _deleteTaskCommand;
         public ICommand DeleteTaskCommand => _deleteTaskCommand ?? (_deleteTaskCommand = new CommandHandler(DeleteAction, () => true));
+                
+        private ICommand _manageRecuringTasksCommand;
+        public ICommand ManageRecuringTasksCommand => _manageRecuringTasksCommand ?? (_manageRecuringTasksCommand = new CommandHandler(ManageRecuringTasksAction, () => true));
+
 
         private string _totalDurationTime;
         public string TotalDurationTime
@@ -83,6 +87,11 @@ namespace TimeTickets
         {
             this.SelectedTimeTicketVM.Stop();
             this.TimeTickets.Remove(this.SelectedTimeTicketVM);
+        }
+
+        private void ManageRecuringTasksAction()
+        {
+
         }
     }
 }

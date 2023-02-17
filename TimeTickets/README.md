@@ -11,10 +11,11 @@ A simple time tracking app written in C'# / Windows Presentation Foundation (WPF
 * Default Button in RenameTimeTicketWindow
 * Hotkey for creating new Task
 * Options Window (Hotkey, Save location)
-* Add main menu
 * Add program icon
 
 ##### Done
+* Added Main Menu
+* Global RepositoryCollection
 * Total elapsed time in status bar
 * Pause and resume tasks
 * Create new task
