@@ -80,8 +80,11 @@ namespace TimeTickets
 
         private void RenameAction()
         {
-            RenameTimeTicketWindow vm = new RenameTimeTicketWindow(SelectedTimeTicketVM);
-            vm.ShowDialog();
+            TextEditWindow window = new TextEditWindow("Rename Task", "Enter new task name", SelectedTimeTicketVM.Description);
+            if (window.ShowDialog().Value)
+            {
+                SelectedTimeTicketVM.Description = window.InputText;
+            }
         }
 
         private void DeleteAction()

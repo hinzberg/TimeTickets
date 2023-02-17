@@ -19,12 +19,19 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
+        <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}" LastChildFill="False">
+            <Button VerticalAlignment="Center" DockPanel.Dock="Right" Margin="5" Command="{Binding NewRecuringCommand}">
+                <TextBlock Style="{StaticResource ButtonTextStyle}" Text="New" Margin="10,0,10,0" />
+            </Button>
+        </DockPanel>
+
         <!--ListView-->
-        <ListBox Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding Path=RecuringTasks}" Grid.Row="0" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}">
+        <ListBox Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding Path=RecuringTasks}" Grid.Row="1" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -39,7 +46,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <custom:WindowCloseButtonsUserControl Grid.Row="1"/>
+        <custom:WindowCloseButtonsUserControl Grid.Row="2"/>
 
     </Grid>
 </Window>

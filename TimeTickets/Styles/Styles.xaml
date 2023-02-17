@@ -33,6 +33,10 @@
         <Setter Property="Background" Value="White"/>
     </Style>
 
+    <Style TargetType="Button">
+        <Setter Property="MinWidth" Value="80"/>
+    </Style>
+
     <!--<Style TargetType="{x:Type Image}" x:Key="GenderImage">
         <Style.Triggers>
             <DataTrigger Binding="{Binding Gender}" Value="Male">
