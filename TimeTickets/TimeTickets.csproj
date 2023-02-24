@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Day+Ticket\IRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="RecuringTasks\RecuringTask.cs" />
@@ -67,7 +68,9 @@
       <DependentUpon>TextEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextEditWindowViewModel.cs" />
-    <Compile Include="TimeTicketViewModel.cs" />
+    <Compile Include="Day+Ticket\Day.cs" />
+    <Compile Include="Day+Ticket\Ticket.cs" />
+    <Compile Include="Day+Ticket\TicketViewModel.cs" />
     <Compile Include="CustomControls\WindowCloseButtonsUserControl.xaml.cs">
       <DependentUpon>WindowCloseButtonsUserControl.xaml</DependentUpon>
     </Compile>

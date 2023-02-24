@@ -48,8 +48,8 @@
                 <Button VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Name="NewTaskButton" Command="{Binding NewTaskCommand}">
                     <TextBlock Style="{StaticResource ButtonTextStyle}" Text="New Task" Margin="10,0,10,0"/>
                 </Button>
-                <Button VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Name="ClearAllButton" Command="{Binding ClearAllCommand}">
-                    <TextBlock Style="{StaticResource ButtonTextStyle}" Text="Clear All" Margin="10,0,10,0" />
+                <Button VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Name="NewDayButton" Command="{Binding NewDayCommand}">
+                    <TextBlock Style="{StaticResource ButtonTextStyle}" Text="New Day" Margin="10,0,10,0" />
                 </Button>
             </DockPanel>
         </Grid>

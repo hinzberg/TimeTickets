@@ -4,19 +4,21 @@ using System.Linq;
 using System.Windows.Input;
 using System.Windows.Threading;
 using TimeTickets.RecuringTasks;
+using TimeTickets.TimeTicket;
 using WPFToolkit;
 
 namespace TimeTickets
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private Day _currentDay;
         private DispatcherTimer _dispatcherTimer;
         public ObservableCollection<TimeTicketViewModel> TimeTickets { get; set; }
         public TimeTicketViewModel SelectedTimeTicketVM { get; set; }
 
-        public bool CanExecuteClearAll => true; // always
-        private ICommand _clearAllCommand;
-        public ICommand ClearAllCommand => _clearAllCommand ?? (_clearAllCommand = new CommandHandler(ClearAllAction, () => CanExecuteClearAll));
+        public bool CanExecuteNewDay => true; // always
+        private ICommand _newDayCommand;
+        public ICommand NewDayCommand => _newDayCommand ?? (_newDayCommand = new CommandHandler(NewDayAction, () => CanExecuteNewDay));
 
         public bool CanExecuteNewTask => true; // always
         private ICommand _newTaskCommand;
@@ -47,6 +49,7 @@ namespace TimeTickets
 
         public MainWindowViewModel()
         {
+            _currentDay = new Day();
             this.TimeTickets = new ObservableCollection<TimeTicketViewModel>();
             _dispatcherTimer = new DispatcherTimer();
             _dispatcherTimer.Tick += new EventHandler(OnDispatcherTimerTick);
@@ -56,14 +59,13 @@ namespace TimeTickets
 
         private void OnDispatcherTimerTick(object sender, EventArgs e)
         {
-            int allElapsedSeconds = TimeTickets.Sum(a => a.TotalElapsedSeconds);
-            TimeSpan ts = new TimeSpan(0, 0, 0, allElapsedSeconds, 0);
+            TimeSpan ts = new TimeSpan(0, 0, 0, _currentDay.AllElapsedSeconds, 0);
             TotalDurationTime = ts.ToString(@"hh\:mm\:ss");
         }
 
-        private void ClearAllAction()
+        private void NewDayAction()
         {
-            //todo confirm messagebox 
+            //ToDo issue 1 : Is this really a new day or the same like the previous day?
 
             foreach (var timeTicket in TimeTickets)
                 timeTicket.Stop();
@@ -73,9 +75,11 @@ namespace TimeTickets
 
         private void NewTaskAction()
         {
-            var ticket = new TimeTicketViewModel(this.TimeTickets);
-            ticket.Start();
-            this.TimeTickets.Insert(0, ticket);
+            Ticket ticket = new Ticket();
+            _currentDay.AddTicket(ticket);
+            var ticketVM = new TimeTicketViewModel(_currentDay, ticket);
+            ticketVM.Start();
+            this.TimeTickets.Insert(0, ticketVM);
         }
 
         private void RenameAction()

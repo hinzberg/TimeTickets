@@ -12,6 +12,7 @@ A simple time tracking app written in C'# / Windows Presentation Foundation (WPF
 * Hotkey for creating new Task
 * Options Window (Hotkey, Save location)
 * Add program icon
+* ToDo issue 1 : Is this really a new day or the same like the previous day?
 
 ##### Done
 * Added Main Menu
