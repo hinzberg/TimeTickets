@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using WPFToolkit;
 
@@ -51,8 +46,7 @@ namespace TimeTickets
                 OnPropertyChanged();
             }
         }
-
-
+        
         public TextEditWindowViewModel(Window window, string windowTitle, string labelText, string inputText)
         {
             _windowTitle = windowTitle;

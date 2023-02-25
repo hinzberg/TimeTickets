@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace TimeTickets.TimeTicket
 {
-    public class Day : IRepository
-    {
+    public class Day
+    { 
         private readonly List<Ticket> _tickets;
 
         public Day()

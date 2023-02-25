@@ -54,8 +54,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Day+Ticket\IRepository.cs" />
+    <Compile Include="CustomControls\WindowOkButtonUserControl.xaml.cs">
+      <DependentUpon>WindowOkButtonUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IViewModel.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="RecuringTasks\RecuringTask.cs" />
     <Compile Include="RecuringTasks\RecuringTasksRepository.cs" />
@@ -63,11 +66,12 @@
       <DependentUpon>RecuringTasksWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RecuringTasks\RecuringTasksWindowViewModel.cs" />
+    <Compile Include="RecuringTasks\RecuringTaskViewModel.cs" />
     <Compile Include="RepositoryCollection.cs" />
-    <Compile Include="TextEditWindow.xaml.cs">
+    <Compile Include="CustomWindows\TextEditWindow.xaml.cs">
       <DependentUpon>TextEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TextEditWindowViewModel.cs" />
+    <Compile Include="CustomWindows\TextEditWindowViewModel.cs" />
     <Compile Include="Day+Ticket\Day.cs" />
     <Compile Include="Day+Ticket\Ticket.cs" />
     <Compile Include="Day+Ticket\TicketViewModel.cs" />
@@ -76,6 +80,10 @@
     </Compile>
     <Compile Include="WPFToolkit\CommandHandler.cs" />
     <Compile Include="WPFToolkit\ViewModelBase.cs" />
+    <Page Include="CustomControls\WindowOkButtonUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -100,7 +108,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TextEditWindow.xaml">
+    <Page Include="CustomWindows\TextEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

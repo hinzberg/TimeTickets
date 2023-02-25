@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimeTickets"
-        xmlns:custom="clr-namespace:TimeTickets"
+        xmlns:custom="clr-namespace:TimeTickets.CustomControl"
         mc:Ignorable="d"
         Title="{Binding Path=WindowTitle}" Height="150" Width="500" WindowStartupLocation="CenterScreen">
     

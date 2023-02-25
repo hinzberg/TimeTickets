@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WPFToolkit;
 
@@ -12,44 +7,58 @@ namespace TimeTickets.RecuringTasks
     public class RecuringTasksWindowViewModel
     {
         private readonly RecuringTasksWindow _window;
-        public ObservableCollection<RecuringTask> RecuringTasks { get; set; }
+        public ObservableCollection<RecuringTaskViewModel> RecuringTaskVMs { get; set; }
         public RecuringTask SelectedItem { get; set; }
 
-        private ICommand _cancelWindowCommand;
-        public ICommand CancelWindowCommand => _cancelWindowCommand ?? (_cancelWindowCommand = new CommandHandler(CancelWindowAction, () => true));
-
-        private ICommand _submitWindowCommand;
-        public ICommand SubmitWindowCommand => _submitWindowCommand ?? (_submitWindowCommand = new CommandHandler(SubmitWindowAction, () => true));
+        private ICommand _closeWindowCommand;
+        public ICommand CloseWindowCommand => _closeWindowCommand ?? (_closeWindowCommand = new CommandHandler(CloseWindowAction, () => true));
 
         private ICommand _newRecuringCommand;
         public ICommand NewRecuringCommand => _newRecuringCommand ?? (_newRecuringCommand = new CommandHandler(NewRecuringAction, () => true));
 
-
         public RecuringTasksWindowViewModel(RecuringTasksWindow window)
         {
             _window = window;
-            RecuringTasks = RepositoryCollection.Instance.RecuringTasksRepository.RecuringTasks;
+            RecuringTaskVMs = new ObservableCollection<RecuringTaskViewModel>();
+
+            foreach (var recuringTask in RepositoryCollection.Instance.RecuringTasksRepository.RecuringTasks)
+                RecuringTaskVMs.Add(CreateRecuringTaskViewModel(recuringTask));
+        }
+
+        private RecuringTaskViewModel CreateRecuringTaskViewModel(RecuringTask recuringTask)
+        {
+            var taskVM = new RecuringTaskViewModel(recuringTask);
+            taskVM.DeleteAction = DeleteAction;
+            taskVM.EditAction = EditAction;
+            return taskVM;
+        }
+
+        private void DeleteAction(RecuringTaskViewModel taskVM)
+        {
+            RecuringTaskVMs.Remove(taskVM);
+            RepositoryCollection.Instance.RecuringTasksRepository.RecuringTasks.Remove(taskVM.GetModel());
+        }
+
+        private void EditAction(RecuringTaskViewModel taskVM)
+        {
+
         }
 
         private void NewRecuringAction()
         {
-            TextEditWindow textEditWindow = new TextEditWindow(@"New recuring task",  @"Enter new task name", "Default");
-            if(textEditWindow.ShowDialog().Value);
+            TextEditWindow textEditWindow = new TextEditWindow(@"New recuring task", @"Enter new task name", "Default");
+            if (textEditWindow.ShowDialog().Value) ;
             {
-                var task = new RecuringTask();
-                task.Description = textEditWindow.InputText;
-                RecuringTasks.Add(task);
+                var recuringTask = new RecuringTask();
+                recuringTask.Description = textEditWindow.InputText;
+                RepositoryCollection.Instance.RecuringTasksRepository.RecuringTasks.Add(recuringTask);
+                RecuringTaskVMs.Add(CreateRecuringTaskViewModel(recuringTask));
             }
         }
 
-        private void CancelWindowAction()
+        private void CloseWindowAction()
         {
             _window.DialogResult = false;
-        }
-
-        private void SubmitWindowAction()
-        {
-            _window.DialogResult = true;
         }
     }
 }

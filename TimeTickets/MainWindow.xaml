@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TimeTickets"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Time Tickets" Height="450" Width="800">
+        Title="Time Tickets" Height="480" Width="830">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -55,7 +55,7 @@
         </Grid>
 
         <!--ListView-->
-        <ListBox Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding Path=TimeTickets}" Grid.Row="2" SelectedItem="{Binding Path=SelectedTimeTicketVM, Mode=TwoWay}">
+        <ListBox Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding Path=TimeTicketVMs}" Grid.Row="2" SelectedItem="{Binding Path=SelectedTimeTicketVM, Mode=TwoWay}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
