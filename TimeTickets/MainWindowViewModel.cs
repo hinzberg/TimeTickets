@@ -51,6 +51,9 @@ namespace TimeTickets
         public MainWindowViewModel()
         {
             _currentDay = new Day();
+
+            RepositoryCollection.Instance.DayRepository.Add(_currentDay);
+
             this.TimeTicketVMs = new ObservableCollection<TimeTicketViewModel>();
             _dispatcherTimer = new DispatcherTimer();
             _dispatcherTimer.Tick += new EventHandler(OnDispatcherTimerTick);
@@ -97,7 +100,7 @@ namespace TimeTickets
             TextEditWindow window = new TextEditWindow("Rename Task", "Enter new task name", SelectedTimeTicketVM.Description);
             if (window.ShowDialog().Value)
             {
-                SelectedTimeTicketVM.Description = window.InputText;
+                SelectedTimeTicketVM.Description = window.InputText;                
             }
         }
 

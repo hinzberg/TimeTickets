@@ -19,7 +19,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="45"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
@@ -45,11 +45,11 @@
         <!--Toolbar-->
         <Grid Grid.Row="1">
             <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}">
-                <Button VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Name="NewTaskButton" Command="{Binding NewTaskCommand}">
-                    <TextBlock Style="{StaticResource ButtonTextStyle}" Text="New Task" Margin="10,0,10,0"/>
+                <Button VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,0,0,0" Name="NewTaskButton" Command="{Binding NewTaskCommand}" Style="{StaticResource GreenButtonStyle}" Height="30">
+                    <TextBlock  Text="New Task" Margin="10,0,10,0"/>
                 </Button>
-                <Button VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Name="NewDayButton" Command="{Binding NewDayCommand}">
-                    <TextBlock Style="{StaticResource ButtonTextStyle}" Text="New Day" Margin="10,0,10,0" />
+                <Button VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" Name="NewDayButton" Command="{Binding NewDayCommand}" Style="{StaticResource RedButtonStyle}" Height="30">
+                    <TextBlock Text="New Day" Margin="10,0,10,0" />
                 </Button>
             </DockPanel>
         </Grid>
@@ -73,11 +73,11 @@
                             <TextBlock Style="{StaticResource HeaderStyle}" Text="{Binding Path=DurationTime}"/>
                             <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding Path=Description}"/>
                         </StackPanel>
-                        <Button  Grid.Column="1" VerticalAlignment="Center" Margin="2"  Name="PauseButton" Command="{Binding PauseCommand}">
-                            <TextBlock Style="{StaticResource ButtonTextStyle}" Text="Pause" Margin="10"/>
+                        <Button  Grid.Column="1" VerticalAlignment="Center" Margin="2"  Name="PauseButton" Command="{Binding PauseCommand}" Style="{StaticResource BlueButtonStyle}">
+                            <TextBlock Text="Pause" Margin="10"/>
                         </Button>
-                        <Button  Grid.Column="2" VerticalAlignment="Center" Margin="2" Name="ResumeButton" Command="{Binding RunCommand}">
-                            <TextBlock Style="{StaticResource ButtonTextStyle}" Text="Resume" Margin="10"/>
+                        <Button  Grid.Column="2" VerticalAlignment="Center" Margin="2" Name="ResumeButton" Command="{Binding RunCommand}" Style="{StaticResource BlueButtonStyle}">
+                            <TextBlock Text="Resume" Margin="10"/>
                         </Button>
                     </Grid>
                 </DataTemplate>

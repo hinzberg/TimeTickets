@@ -37,22 +37,86 @@
         <Setter Property="MinWidth" Value="80"/>
     </Style>
 
-    <!--<Style TargetType="{x:Type Image}" x:Key="GenderImage">
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding Gender}" Value="Male">
-                <Setter Property="Source" Value="{StaticResource Male}" />
-                <Setter Property="ToolTip" Value="Male"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Gender}" Value="Female">
-                <Setter Property="Source" Value="{StaticResource Woman}" />
-                <Setter Property="ToolTip" Value="Female"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Gender}" Value="Other">
-                <Setter Property="Source" Value="{StaticResource Other}" />
-                <Setter Property="ToolTip" Value="Other"/>
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>-->
+    <Style x:Key="BlueButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="CornflowerBlue"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="10pt"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  Background="{TemplateBinding Background}"
+                  CornerRadius="5">
+                        <ContentPresenter HorizontalAlignment="Center"
+                              VerticalAlignment="Center" Margin="4" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="DodgerBlue"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="GreenButtonStyle" TargetType="Button" BasedOn="{StaticResource BlueButtonStyle}">
+        <Setter Property="Background" Value="MediumSeaGreen"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  Background="{TemplateBinding Background}"
+                  CornerRadius="5">
+                        <ContentPresenter HorizontalAlignment="Center"
+                              VerticalAlignment="Center" Margin="4" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="SeaGreen"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="RedButtonStyle" TargetType="Button" BasedOn="{StaticResource BlueButtonStyle}">
+        <Setter Property="Background" Value="Crimson"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  Background="{TemplateBinding Background}"
+                  CornerRadius="5">
+                        <ContentPresenter HorizontalAlignment="Center"
+                              VerticalAlignment="Center" Margin="4" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="DarkRed"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="ListBox" x:Key="ListBoxStyle">
         <Setter Property="BorderThickness"  Value="0"/>

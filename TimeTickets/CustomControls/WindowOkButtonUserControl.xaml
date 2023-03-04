@@ -16,8 +16,8 @@
     </UserControl.Resources>
 
     <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}" LastChildFill="False">
-        <Button DockPanel.Dock="Right" Margin="5" VerticalAlignment="Center" Command="{Binding CloseWindowCommand}">
-            <TextBlock Style="{StaticResource ButtonTextStyle}" Text="Close" Margin="10,0,10,0" />
+        <Button DockPanel.Dock="Right" Margin="5" VerticalAlignment="Center" Command="{Binding CloseWindowCommand}" Style="{StaticResource GreenButtonStyle}">
+            <TextBlock Text="Close" Margin="10,0,10,0" />
         </Button>
     </DockPanel>
 </UserControl>

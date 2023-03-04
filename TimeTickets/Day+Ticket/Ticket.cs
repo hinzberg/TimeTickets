@@ -6,7 +6,6 @@ namespace TimeTickets.TimeTicket
     public class Ticket
     {
         private int _elapsedSecondsPreviousRun;
-
         public string Description { get; set; }
         public Stopwatch Stopwatch { get; set; }
         public Guid Id { get; set; }

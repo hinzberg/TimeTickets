@@ -10,10 +10,12 @@ namespace TimeTickets.TimeTicket
     public class Day
     { 
         private readonly List<Ticket> _tickets;
+        public DateTime Date { get; set; }
 
         public Day()
         {
             _tickets = new List<Ticket>();
+            Date = DateTime.Today;
         }
 
         public int AllElapsedSeconds { get { return _tickets.Sum(a => a.TotalElapsedSeconds); } }
@@ -22,6 +24,11 @@ namespace TimeTickets.TimeTicket
         {
             StopOtherTickets(ticket);
             _tickets.Add(ticket);
+        }
+
+        public List<Ticket> GetAllTickets()
+        {
+            return _tickets;
         }
 
         /// <summary>

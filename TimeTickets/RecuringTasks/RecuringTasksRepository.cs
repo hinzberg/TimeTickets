@@ -29,5 +29,15 @@ namespace TimeTickets.RecuringTasks
         {
             return RecuringTasks.Remove(item);
         }
+
+        public bool Load(string filename)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Save(string filename)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

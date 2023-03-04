@@ -20,7 +20,13 @@ namespace TimeTickets
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel();
+            RepositoryCollection.Instance.Load();
+            this.DataContext = new MainWindowViewModel();            
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            RepositoryCollection.Instance.Save();
         }
     }
 }

@@ -10,5 +10,7 @@ namespace TimeTickets
     {
         void Add(T item);
         bool Remove(T item);
+        bool Load(string filename);
+        bool Save(string filename);       
     }
 }
