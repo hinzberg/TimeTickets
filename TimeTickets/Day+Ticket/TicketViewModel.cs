@@ -30,11 +30,11 @@ namespace TimeTickets
             }
         }
 
-        public bool CanPause => _ticket.Stopwatch != null && _ticket.Stopwatch.IsRunning;
+        public bool CanPause => _ticket._stopwatch != null && _ticket._stopwatch.IsRunning;
         private ICommand _pauseCommand;
         public ICommand PauseCommand => _pauseCommand ?? (_pauseCommand = new CommandHandler(PauseCommandAction, () => CanPause));
 
-        public bool CanRun => _ticket.Stopwatch != null && !_ticket.Stopwatch.IsRunning;
+        public bool CanRun => _ticket._stopwatch != null && !_ticket._stopwatch.IsRunning;
         private ICommand _runCommand;
         public ICommand RunCommand => _runCommand ?? (_runCommand = new CommandHandler(RunCommandAction, () => CanRun));
 
@@ -48,7 +48,7 @@ namespace TimeTickets
         {
             _ticket = ticket;
             DurationTime = "00:00:00";
-            Description = "Edit Description";
+            Description = ticket.Description;
         }
 
         public void Start()

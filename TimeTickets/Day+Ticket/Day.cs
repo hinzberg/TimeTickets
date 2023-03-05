@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TimeTickets.TimeTicket
 {
     public class Day
-    { 
+    {
         private readonly List<Ticket> _tickets;
         public DateTime Date { get; set; }
 
@@ -24,6 +24,20 @@ namespace TimeTickets.TimeTicket
         {
             StopOtherTickets(ticket);
             _tickets.Add(ticket);
+        }
+
+        public void RemoveTicket(Ticket ticket)
+        {
+            ticket.Stop();
+            _tickets.Remove(ticket);
+        }
+
+        public void ClearTickets()
+        {
+            foreach (var ticket in _tickets)
+                ticket.Stop();
+
+            _tickets.Clear();
         }
 
         public List<Ticket> GetAllTickets()

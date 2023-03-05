@@ -58,6 +58,8 @@
       <DependentUpon>WindowOkButtonUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Day+Ticket\DayRepository.cs" />
+    <Compile Include="HelperClasses\StringExtensions.cs" />
+    <Compile Include="HelperClasses\XmlExtensions.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IViewModel.cs" />
     <Compile Include="MainWindowViewModel.cs" />

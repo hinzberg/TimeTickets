@@ -50,11 +50,25 @@ namespace TimeTickets
 
         public MainWindowViewModel()
         {
-            _currentDay = new Day();
+            TimeTicketVMs = new ObservableCollection<TimeTicketViewModel>();
 
-            RepositoryCollection.Instance.DayRepository.Add(_currentDay);
+            if (RepositoryCollection.Instance.DayRepository.Days.Any())
+            {
+                _currentDay = RepositoryCollection.Instance.DayRepository.Days.First();
+                foreach (Ticket ticket in _currentDay.GetAllTickets())
+                    CreateAnInsertTicketVM(ticket);
+            }
+            else
+            {
+                _currentDay = new Day();
+                RepositoryCollection.Instance.DayRepository.Add(_currentDay);
+            }
 
-            this.TimeTicketVMs = new ObservableCollection<TimeTicketViewModel>();
+            InitializeMainTimer();
+        }
+
+        private void InitializeMainTimer()
+        {
             _dispatcherTimer = new DispatcherTimer();
             _dispatcherTimer.Tick += new EventHandler(OnDispatcherTimerTick);
             _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
@@ -73,21 +87,27 @@ namespace TimeTickets
         private void NewDayAction()
         {
             //ToDo issue 1 : Is this really a new day or the same like the previous day?
-
             foreach (var timeTicket in TimeTicketVMs)
                 timeTicket.Stop();
 
             TimeTicketVMs.Clear();
+            _currentDay.ClearTickets();
+        }
+
+        private TimeTicketViewModel CreateAnInsertTicketVM(Ticket ticket)
+        {
+            var ticketVM = new TimeTicketViewModel(ticket);
+            ticketVM.StopOtherTicketsAction = StopOtherTicketsAction;
+            this.TimeTicketVMs.Insert(0, ticketVM);
+            return ticketVM;
         }
 
         private void NewTaskAction()
         {
             Ticket ticket = new Ticket();
             _currentDay.AddTicket(ticket);
-            var ticketVM = new TimeTicketViewModel(ticket);
-            ticketVM.StopOtherTicketsAction = StopOtherTicketsAction;
-            ticketVM.Start();
-            this.TimeTicketVMs.Insert(0, ticketVM);
+            TimeTicketViewModel timeTicketViewModel = CreateAnInsertTicketVM(ticket);
+            timeTicketViewModel.Start();
         }
 
         private void StopOtherTicketsAction(Ticket ticket)
@@ -100,14 +120,15 @@ namespace TimeTickets
             TextEditWindow window = new TextEditWindow("Rename Task", "Enter new task name", SelectedTimeTicketVM.Description);
             if (window.ShowDialog().Value)
             {
-                SelectedTimeTicketVM.Description = window.InputText;                
+                SelectedTimeTicketVM.Description = window.InputText;
             }
         }
 
         private void DeleteAction()
         {
+            _currentDay.RemoveTicket(SelectedTimeTicketVM.GetModel());
             this.SelectedTimeTicketVM.Stop();
-            this.TimeTicketVMs.Remove(this.SelectedTimeTicketVM);
+            this.TimeTicketVMs.Remove(this.SelectedTimeTicketVM);           
         }
 
         private void ManageRecuringTasksAction()

@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Xml;
+using TimeTickets.HelperClasses;
 using TimeTickets.TimeTicket;
 
 namespace TimeTickets.Day_Ticket
@@ -25,6 +26,33 @@ namespace TimeTickets.Day_Ticket
 
         public bool Load(string filename)
         {
+            if (!System.IO.File.Exists(filename))
+                return false;
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filename);
+
+            XmlNodeList daysNodes = doc.SelectNodes("TimeTickets/Days/Day");
+            foreach (XmlNode dayNode in daysNodes)
+            {
+                Day day = new Day();
+                var dateAttrib = dayNode.GetNodeAttribute("Date");
+                day.Date = dateAttrib.ToDate();
+
+                XmlNodeList ticketsNodes = dayNode.SelectNodes("Tickets/Ticket");
+                foreach (XmlNode ticketNode in ticketsNodes)
+                {
+                    string id = ticketNode.SelectSingleNode("Id").InnerText;
+                    string description = ticketNode.SelectSingleNode("Description").InnerText;
+                    string seconds = ticketNode.SelectSingleNode("TotalElapsedSeconds").InnerText;
+                    int elapsedSeconds = int.Parse(seconds);
+
+                    Ticket ticket = Ticket.Create(id, description, elapsedSeconds);
+                    day.AddTicket(ticket);
+                }
+                Add(day);
+            }
+
             return true;
         }
 
@@ -36,8 +64,10 @@ namespace TimeTickets.Day_Ticket
             XmlAttribute versionAttribute = doc.CreateAttribute("Version");
             versionAttribute.Value = "1.0";
             rootNode.Attributes.Append(versionAttribute);
-
             doc.AppendChild(rootNode);
+
+            XmlElement daysNode = doc.CreateElement("Days");
+            rootNode.AppendChild(daysNode);
 
             foreach (var day in Days)
             {
@@ -47,12 +77,15 @@ namespace TimeTickets.Day_Ticket
                 dateAttribute.Value = day.Date.ToString("yyyy-MM-dd");
                 dayNode.Attributes.Append(dateAttribute);
 
-                rootNode.AppendChild(dayNode);
+                daysNode.AppendChild(dayNode);
+
+                XmlElement ticketsNode = doc.CreateElement("Tickets");
+                dayNode.AppendChild(ticketsNode);
 
                 foreach (var ticket in day.GetAllTickets())
                 {
                     XmlElement ticketNode = doc.CreateElement("Ticket");
-                    dayNode.AppendChild(ticketNode);
+                    ticketsNode.AppendChild(ticketNode);
 
                     XmlElement idNode = doc.CreateElement("Id");
                     idNode.InnerText = ticket.Id.ToString();
@@ -67,6 +100,7 @@ namespace TimeTickets.Day_Ticket
                     ticketNode.AppendChild(secondsNode);
                 }
             }
+
             doc.Save(filename);
             return true;
         }
