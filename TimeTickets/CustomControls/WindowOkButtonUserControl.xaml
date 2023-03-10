@@ -15,9 +15,11 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}" LastChildFill="False">
-        <Button DockPanel.Dock="Right" Margin="5" VerticalAlignment="Center" Command="{Binding CloseWindowCommand}" Style="{StaticResource GreenButtonStyle}">
-            <TextBlock Text="Close" Margin="10,0,10,0" />
-        </Button>
-    </DockPanel>
+    <Border BorderBrush="CornflowerBlue" BorderThickness="0,1,0,0" SnapsToDevicePixels="True">
+        <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}" LastChildFill="False">
+            <Button DockPanel.Dock="Right" Margin="5" VerticalAlignment="Center" Command="{Binding CloseWindowCommand}" Style="{StaticResource GreenButtonStyle}" IsDefault="True">
+                <TextBlock Text="Close" Margin="10,0,10,0" />
+            </Button>
+        </DockPanel>
+    </Border>
 </UserControl>

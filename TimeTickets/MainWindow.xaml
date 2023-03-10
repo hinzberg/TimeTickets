@@ -45,14 +45,16 @@
 
         <!--Toolbar-->
         <Grid Grid.Row="1">
+            <Border BorderBrush="CornflowerBlue" BorderThickness="0,0,0,1" SnapsToDevicePixels="True">
             <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}">
-                <Button VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,0,0,0" Name="NewTaskButton" Command="{Binding NewTaskCommand}" Style="{StaticResource GreenButtonStyle}" Height="30">
+                <Button VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,0,0,0" Name="NewTaskButton" Command="{Binding NewTaskCommand}" Style="{StaticResource GreenButtonStyle}" Height="30" Width="100">
                     <TextBlock  Text="New Task" Margin="10,0,10,0"/>
                 </Button>
-                <Button VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" Name="NewDayButton" Command="{Binding NewDayCommand}" Style="{StaticResource RedButtonStyle}" Height="30">
+                <Button VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" Name="NewDayButton" Command="{Binding NewDayCommand}" Style="{StaticResource RedButtonStyle}" Height="30" Width="100">
                     <TextBlock Text="Clear Day" Margin="10,0,10,0" />
                 </Button>
             </DockPanel>
+            </Border>
         </Grid>
 
         <!--ListView-->
@@ -67,18 +69,18 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="85"/>
-                            <ColumnDefinition Width="85"/>
+                            <ColumnDefinition Width="105"/>
+                            <ColumnDefinition Width="105"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel  Grid.Column="0"    Orientation="Vertical" Margin="5,0,0,0">
+                        <StackPanel  Grid.Column="0" Orientation="Vertical" Margin="0,0,0,0">
                             <TextBlock Style="{StaticResource HeaderStyle}" Text="{Binding Path=DurationTime}"/>
                             <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding Path=Description}"/>
                         </StackPanel>
-                        <Button  Grid.Column="1" VerticalAlignment="Center" Margin="2"  Name="PauseButton" Command="{Binding PauseCommand}" Style="{StaticResource BlueButtonStyle}">
-                            <TextBlock Text="Pause" Margin="10"/>
+                        <Button  Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Center" Name="PauseButton" Command="{Binding PauseCommand}" Style="{StaticResource BlueButtonStyle}" Height="30" Width="100">
+                            <TextBlock Text="Pause" />
                         </Button>
-                        <Button  Grid.Column="2" VerticalAlignment="Center" Margin="2" Name="ResumeButton" Command="{Binding RunCommand}" Style="{StaticResource BlueButtonStyle}">
-                            <TextBlock Text="Resume" Margin="10"/>
+                        <Button  Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center"  Name="ResumeButton" Command="{Binding RunCommand}" Style="{StaticResource BlueButtonStyle}" Height="30" Width="100">
+                            <TextBlock Text="Resume" />
                         </Button>
                     </Grid>
                 </DataTemplate>
@@ -95,9 +97,11 @@
 
         <!--Statusbar-->
         <Grid Grid.Row="3">
-            <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}">
-                <TextBlock Style="{StaticResource HeaderStyle}" Margin="10,10,0,0" Text="{Binding Path=TotalDurationTime}"/>
-            </DockPanel>
+            <Border BorderBrush="CornflowerBlue" BorderThickness="0,1,0,0" SnapsToDevicePixels="True">
+                <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}">
+                    <TextBlock Style="{StaticResource HeaderStyle}" Margin="10,10,0,0" Text="{Binding Path=TotalDurationTime}"/>
+                </DockPanel>
+            </Border>
         </Grid>
     </Grid>
 

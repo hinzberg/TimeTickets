@@ -14,13 +14,15 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}" LastChildFill="False">
-        <Button DockPanel.Dock="Right" Margin="5" VerticalAlignment="Center" Command="{Binding CancelWindowCommand}" Style="{StaticResource RedButtonStyle}">
-            <TextBlock Text="Cancel" Margin="10,0,10,0" />
-        </Button>
-        <Button DockPanel.Dock="Right" Margin="5" VerticalAlignment="Center" Command="{Binding SubmitWindowCommand}" Style="{StaticResource GreenButtonStyle}">
-            <TextBlock Text="Submit" Margin="10,0,10,0"/>
-        </Button>
-    </DockPanel>
 
+    <Border BorderBrush="CornflowerBlue" BorderThickness="0,1,0,0" SnapsToDevicePixels="True">
+        <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}" LastChildFill="False">
+            <Button DockPanel.Dock="Right" Margin="5" VerticalAlignment="Center" Command="{Binding CancelWindowCommand}" Style="{StaticResource RedButtonStyle}">
+                <TextBlock Text="Cancel" Margin="10,0,10,0" />
+            </Button>
+            <Button DockPanel.Dock="Right" Margin="5" VerticalAlignment="Center" Command="{Binding SubmitWindowCommand}" Style="{StaticResource GreenButtonStyle}" IsDefault="True">
+                <TextBlock Text="Submit" Margin="10,0,10,0"/>
+            </Button>
+        </DockPanel>
+    </Border>
 </UserControl>
