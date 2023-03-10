@@ -12,6 +12,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Styles.xaml"/>
+                <ResourceDictionary Source="/Styles/MenuControlTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -84,9 +85,9 @@
             </ListBox.ItemTemplate>
 
             <ListBox.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Edit Task Description" Command="{Binding RenameTaskCommand}"/>
-                    <MenuItem Header="Delete Task" Command="{Binding DeleteTaskCommand}"/>
+                <ContextMenu >
+                    <MenuItem Style="{StaticResource ContextMenuItemStyle}" Header="Edit Task Description" Command="{Binding RenameTaskCommand}"/>
+                    <MenuItem Style="{StaticResource ContextMenuItemStyle}" Header="Delete Task" Command="{Binding DeleteTaskCommand}"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
             
