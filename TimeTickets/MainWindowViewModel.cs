@@ -29,6 +29,10 @@ namespace TimeTickets
         private ICommand _renameTaskCommand;
         public ICommand RenameTaskCommand => _renameTaskCommand ?? (_renameTaskCommand = new CommandHandler(RenameAction, () => true));
 
+        public bool CanEditTimeTask => SelectedTimeTicketVM != null;
+        private ICommand _editTimeTaskCommand;
+        public ICommand EditTimeTaskCommand => _editTimeTaskCommand ?? (_editTimeTaskCommand = new CommandHandler(EditTimeAction, () => true));
+
         public bool CanDeleteTask => SelectedTimeTicketVM != null;
         private ICommand _deleteTaskCommand;
         public ICommand DeleteTaskCommand => _deleteTaskCommand ?? (_deleteTaskCommand = new CommandHandler(DeleteAction, () => true));
@@ -128,7 +132,16 @@ namespace TimeTickets
         {
             _currentDay.RemoveTicket(SelectedTimeTicketVM.GetModel());
             this.SelectedTimeTicketVM.Stop();
-            this.TimeTicketVMs.Remove(this.SelectedTimeTicketVM);           
+            this.TimeTicketVMs.Remove(this.SelectedTimeTicketVM);
+        }
+
+        private void EditTimeAction()
+        {
+            TimeEditWindow timeEditWindow = new TimeEditWindow(SelectedTimeTicketVM.GetModel().TotalElapsedSeconds);
+            if (timeEditWindow.ShowDialog().Value)
+            {
+                SelectedTimeTicketVM.GetModel().SetTotalSeconds(timeEditWindow.GetTotalElapsedSeconds());
+            }
         }
 
         private void ManageRecuringTasksAction()

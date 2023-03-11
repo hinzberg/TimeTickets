@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TimeTickets"
         xmlns:custom="clr-namespace:TimeTickets.CustomControl"
         mc:Ignorable="d"
-        Title="{Binding Path=WindowTitle}" Height="150" Width="500" WindowStartupLocation="CenterScreen">
+        Title="{Binding Path=WindowTitle}" Height="200" Width="500" WindowStartupLocation="CenterScreen">
     
     <Window.Resources>
         <ResourceDictionary>
@@ -22,14 +22,14 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <DockPanel Style="{StaticResource ContentDockPanelStyle}" Margin="5">
-            <TextBlock Margin="0,3,0,5" DockPanel.Dock="Top" Text="{Binding Path=LabelText}"/>
-            <TextBox DockPanel.Dock="Top" Text="{Binding Path=InputText}"/>
+        <DockPanel Style="{StaticResource ContentDockPanelStyle}" Margin="15,5,15,15">
+            <TextBlock Style="{StaticResource HeaderStyle}" Margin="0,3,0,5" DockPanel.Dock="Top" Text="{Binding Path=LabelText}"/>
+            <TextBox Style="{StaticResource TextBoxStyle}" DockPanel.Dock="Top" Text="{Binding Path=InputText}"/>
             <StackPanel />
         </DockPanel>
 
-        <!--Toolbar-->
+        <!--Button Bar-->
         <custom:WindowCloseButtonsUserControl Grid.Row="1"/>
-
     </Grid>
+
 </Window>

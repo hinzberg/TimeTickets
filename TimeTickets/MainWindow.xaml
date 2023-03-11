@@ -89,6 +89,7 @@
             <ListBox.ContextMenu>
                 <ContextMenu >
                     <MenuItem Style="{StaticResource ContextMenuItemStyle}" Header="Edit Task Description" Command="{Binding RenameTaskCommand}"/>
+                    <MenuItem Style="{StaticResource ContextMenuItemStyle}" Header="Edit Time" Command="{Binding EditTimeTaskCommand}"/>
                     <MenuItem Style="{StaticResource ContextMenuItemStyle}" Header="Delete Task" Command="{Binding DeleteTaskCommand}"/>
                 </ContextMenu>
             </ListBox.ContextMenu>

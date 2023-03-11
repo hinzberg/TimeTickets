@@ -1,7 +1,12 @@
 ﻿# Time Tickets
 A simple time tracking app written in C'# / Windows Presentation Foundation (WPF)
 
+### Fetaures
+* Manually edit the task description
+* Manually edit the task time
+
 ##### Done
+* 2023-03-11 TimeEditWindow
 * 2023-03-10 Default Button in TextEditWindow
 * 2023-03-10 ContextMenuItemStyle 
 * 2023-03-04 Save and load current day (there is only one day so far)
@@ -12,16 +17,15 @@ A simple time tracking app written in C'# / Windows Presentation Foundation (WPF
 * 2023-03-04 Create new task
 
 #### Todo
-* Manual edit times
+* MainMenuItemStyle
+* Recurring tasks
 * Make everything look pretty
 * Pause and Resume in Task should be icons.
 * Save and load the current tasks with their times
 * Messagebox before clean all (create Custom Message Box)
 * Messagebox before delete one task (create Custom Message Box)
-* Edit time of task manually
 * Hotkey for creating new Task
 * Options Window (Hotkey, Save location)
-* Add program icon
 * Minimixe in tray
 
 #### Issues

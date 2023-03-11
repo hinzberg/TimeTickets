@@ -41,6 +41,11 @@ namespace TimeTickets.TimeTicket
             _elapsedSecondsPreviousRun = seconds;
         }
 
+        public void SetTotalSeconds(int seconds)
+        {
+            _elapsedSecondsPreviousRun = seconds - (int)_stopwatch.ElapsedMilliseconds / 1000;
+        }
+
         public void Start()
         {
             if (_stopwatch != null)
