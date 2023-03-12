@@ -30,36 +30,38 @@ namespace TimeTickets
             }
         }
 
-        public bool CanPause => _ticket._stopwatch != null && _ticket._stopwatch.IsRunning;
-        private ICommand _pauseCommand;
-        public ICommand PauseCommand => _pauseCommand ?? (_pauseCommand = new CommandHandler(PauseCommandAction, () => CanPause));
+        private bool _isRunning;
+        public bool IsRunning
+        {
+            get { return _isRunning; }
+            set
+            {
+                _isRunning = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public bool CanRun => _ticket._stopwatch != null && !_ticket._stopwatch.IsRunning;
-        private ICommand _runCommand;
-        public ICommand RunCommand => _runCommand ?? (_runCommand = new CommandHandler(RunCommandAction, () => CanRun));
+        public bool CanSwitch = true;
+        private ICommand _switchCommand;
+        public ICommand SwitchCommand => _switchCommand ?? (_switchCommand = new CommandHandler(SwitchCommandAction, () => CanSwitch));
 
         public bool CanEdit => true; // always
         private ICommand _editCommand;
         public ICommand EditCommand => _editCommand ?? (_editCommand = new CommandHandler(EditCommandAction, () => CanEdit));
 
-        public Action<TimeTicket.Ticket> StopOtherTicketsAction { get; set; }
+        public Action<Ticket> StopOtherTicketsAction { get; set; }
 
-        public TimeTicketViewModel(TimeTicket.Ticket ticket)
+        public TimeTicketViewModel(Ticket ticket)
         {
             _ticket = ticket;
+            _ticket.RunningStateChanged = RunningStateChanged;
             DurationTime = "00:00:00";
             Description = ticket.Description;
         }
 
-        public void Start()
+        public void RunningStateChanged(bool isRunning)
         {
-            StopOtherTicketsAction?.Invoke(_ticket);
-            _ticket.Start();
-        }
-
-        public void Stop()
-        {
-            _ticket.Stop();
+            IsRunning = isRunning;
         }
 
         /// <summary>
@@ -71,14 +73,23 @@ namespace TimeTickets
             DurationTime = ts.ToString(@"hh\:mm\:ss");
         }
 
-        private void PauseCommandAction()
+        private void SwitchCommandAction()
         {
-            this.Stop();
+            if (IsRunning)
+                Stop();
+            else
+                Start();
         }
 
-        private void RunCommandAction()
+        public void Start()
         {
-            this.Start();
+            StopOtherTicketsAction?.Invoke(_ticket);
+            _ticket.Start();
+        }
+
+        public void Stop()
+        {
+            _ticket.Stop();
         }
 
         private void EditCommandAction()

@@ -5,6 +5,9 @@ namespace TimeTickets.TimeTicket
 {
     public class Ticket
     {
+        // Action to notify the ViewModel
+        public Action<bool> RunningStateChanged { get; set; }
+        
         private int _elapsedSecondsPreviousRun;
         public string Description { get; set; }
         public Stopwatch _stopwatch { get; set; }
@@ -52,11 +55,13 @@ namespace TimeTickets.TimeTicket
                 _elapsedSecondsPreviousRun += (int)_stopwatch.ElapsedMilliseconds / 1000;
             _stopwatch = new Stopwatch();
             _stopwatch.Start();
+            RunningStateChanged?.Invoke(true);
         }
 
         public void Stop()
         {
             _stopwatch?.Stop();
+            RunningStateChanged?.Invoke(false);
         }
     }
 }
