@@ -13,11 +13,11 @@
 
     <Style TargetType="TextBlock" x:Key="HeaderStyle">
         <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="FontSize" Value="12pt"/>
+        <Setter Property="FontSize" Value="13pt"/>
     </Style>
     <Style TargetType="TextBlock" x:Key="SubHeaderStyle">
         <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="FontSize" Value="10pt"/>
+        <Setter Property="FontSize" Value="11pt"/>
     </Style>
     <Style TargetType="TextBlock" x:Key="ButtonTextStyle">
         <Setter Property="Foreground" Value="Black"/>

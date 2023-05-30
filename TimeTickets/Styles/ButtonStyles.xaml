@@ -18,6 +18,22 @@
         </Style.Triggers>
     </Style>
 
+    <LinearGradientBrush x:Key="BlueGradient" StartPoint="0,0" EndPoint="0,1" >
+        <GradientStop Color="CornflowerBlue" Offset="0.5" />
+        <GradientStop Color="DarkBlue" Offset="1.5" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GreenGradient" StartPoint="0,0" EndPoint="0,1" >
+        <GradientStop Color="MediumSeaGreen" Offset="0.5" />
+        <GradientStop Color="Green" Offset="1.5" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="RedGradient" StartPoint="0,0" EndPoint="0,1" >
+        <GradientStop Color="Crimson" Offset="0.5" />
+        <GradientStop Color="DarkRed" Offset="1.5" />
+    </LinearGradientBrush>
+
+
     <Style x:Key="SwitchButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="CornflowerBlue"/>
         <Setter Property="Foreground" Value="White"/>
@@ -25,7 +41,8 @@
         <Setter Property="FontSize" Value="10pt"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Padding" Value="10,5"/>
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BlueGradient}" />
+        <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -38,6 +55,7 @@
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding IsRunning}" Value="True">
                             <Setter Property="Background" Value="Crimson"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource RedGradient}" />
                         </DataTrigger >
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -63,21 +81,24 @@
     </Style>
 
 
+
+
     <Style x:Key="BlueButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="CornflowerBlue"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BlueGradient}" />
+        <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontFamily" Value="Arial"/>
         <Setter Property="FontSize" Value="10pt"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Padding" Value="10,5"/>
-        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border BorderBrush="{TemplateBinding BorderBrush}"
-                  BorderThickness="{TemplateBinding BorderThickness}"
-                  Background="{TemplateBinding Background}"
-                  CornerRadius="5">
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}"
+                       CornerRadius="5">
                         <ContentPresenter HorizontalAlignment="Center"
                               VerticalAlignment="Center" Margin="4" />
                     </Border>
@@ -94,8 +115,13 @@
         </Setter>
     </Style>
 
+
+
+
     <Style x:Key="GreenButtonStyle" TargetType="Button" BasedOn="{StaticResource BlueButtonStyle}">
         <Setter Property="Background" Value="MediumSeaGreen"/>
+        <Setter Property="BorderBrush" Value="{StaticResource GreenGradient}" />
+        <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -119,8 +145,11 @@
         </Setter>
     </Style>
 
+
     <Style x:Key="RedButtonStyle" TargetType="Button" BasedOn="{StaticResource BlueButtonStyle}">
         <Setter Property="Background" Value="Crimson"/>
+        <Setter Property="BorderBrush" Value="{StaticResource RedGradient}" />
+        <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
