@@ -45,11 +45,13 @@ namespace TimeTickets
         public void Load()
         {
             DayRepository.Load(System.IO.Path.Combine(GetWorkingPath(), "TimeTicketDays.xml"));
+            RecuringTasksRepository.Load(System.IO.Path.Combine(GetWorkingPath(), "RecuringTasks.xml"));
         }
 
         public void Save()
         {
-            DayRepository.Save(System.IO.Path.Combine(GetWorkingPath(), "TimeTicketDays.xml"));            
+            DayRepository.Save(System.IO.Path.Combine(GetWorkingPath(), "TimeTicketDays.xml"));
+            RecuringTasksRepository.Save(System.IO.Path.Combine(GetWorkingPath(), "RecuringTasks.xml"));
         }
     }
 }

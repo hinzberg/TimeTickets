@@ -6,7 +6,7 @@
         xmlns:custom="clr-namespace:TimeTickets.CustomControls"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Manage Recuring Tasks" Height="450" Width="800">
+        Title="Manage Recuring Tasks" Height="450" Width="800" MinWidth="300" MinHeight="300">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -24,44 +24,39 @@
         </Grid.RowDefinitions>
 
         <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}" LastChildFill="False">
-            <Button VerticalAlignment="Center" DockPanel.Dock="Left" Margin="5" Command="{Binding NewRecuringCommand}">
-                <TextBlock Style="{StaticResource ButtonTextStyle}" Text="New" Margin="10,0,10,0" />
+            <Button VerticalAlignment="Center" DockPanel.Dock="Left" Margin="5" Command="{Binding NewRecuringCommand}" Style="{StaticResource GreenButtonStyle}" Height="30" Width="100">
+                <TextBlock Text="New" Margin="10,0,10,0" />
             </Button>
         </DockPanel>
 
         <!--ListView-->
-        <ListBox Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding Path=RecuringTaskVMs}" Grid.Row="1" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                </Style>
-            </ListBox.ItemContainerStyle>
+        <ListBox Style="{StaticResource ListBoxStyle}" 
+                 ItemContainerStyle="{StaticResource ListBoxItemStyle}" 
+                 ItemsSource="{Binding Path=RecuringTaskVMs}" Grid.Row="1" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="85"/>
-                            <ColumnDefinition Width="85"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel  Grid.Column="0" Orientation="Horizontal" Margin="5,0,0,0">
-                            <TextBlock Style="{StaticResource HeaderStyle}" Text="{Binding Path=Description}" VerticalAlignment="Center" />
-                        </StackPanel>
-                        <Button  Grid.Column="1" VerticalAlignment="Center" Margin="2"  Name="EditButton" Command="{Binding EditCommand}">
-                            <TextBlock Style="{StaticResource ButtonTextStyle}" Text="Edit" Margin="10"/>
-                        </Button>
-                        <Button  Grid.Column="2" VerticalAlignment="Center" Margin="2" Name="DeleteButton" Command="{Binding DeleteCommand}">
-                            <TextBlock Style="{StaticResource ButtonTextStyle}" Text="Delete" Margin="10"/>
-                        </Button>
-                    </Grid>
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel  Grid.Column="0" Orientation="Vertical" Margin="7">
+                                <TextBlock Style="{StaticResource HeaderStyle}" Text="{Binding Path=Description}" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                                <Button  VerticalAlignment="Center" Name="EditButton" Command="{Binding EditCommand}" Style="{StaticResource BlueButtonStyle}" Margin="0,0,5,0" Height="30" Width="75">
+                                    <TextBlock Text="Edit" Margin="10,0,10,0"/>
+                                </Button>
+                                <Button VerticalAlignment="Center"  Name="DeleteButton" Command="{Binding DeleteCommand}" Style="{StaticResource RedButtonStyle}" Margin="0,0,5,0" Height="30" Width="75">
+                                    <TextBlock Text="Delete" Margin="10,0,10,0"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-
-
-
         </ListBox>
-
         <custom:WindowOkButtonUserControl Grid.Row="2"/>
-
     </Grid>
 </Window>

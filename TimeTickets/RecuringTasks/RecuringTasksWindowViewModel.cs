@@ -33,17 +33,6 @@ namespace TimeTickets.RecuringTasks
             return taskVM;
         }
 
-        private void DeleteAction(RecuringTaskViewModel taskVM)
-        {
-            RecuringTaskVMs.Remove(taskVM);
-            RepositoryCollection.Instance.RecuringTasksRepository.RecuringTasks.Remove(taskVM.GetModel());
-        }
-
-        private void EditAction(RecuringTaskViewModel taskVM)
-        {
-
-        }
-
         private void NewRecuringAction()
         {
             TextEditWindow textEditWindow = new TextEditWindow(@"New recuring task", @"Enter new task name", "Default");
@@ -53,6 +42,21 @@ namespace TimeTickets.RecuringTasks
                 recuringTask.Description = textEditWindow.InputText;
                 RepositoryCollection.Instance.RecuringTasksRepository.RecuringTasks.Add(recuringTask);
                 RecuringTaskVMs.Add(CreateRecuringTaskViewModel(recuringTask));
+            }
+        }
+
+        private void DeleteAction(RecuringTaskViewModel taskVM)
+        {
+            RecuringTaskVMs.Remove(taskVM);
+            RepositoryCollection.Instance.RecuringTasksRepository.RecuringTasks.Remove(taskVM.GetModel());
+        }
+
+        private void EditAction(RecuringTaskViewModel taskVM)
+        {
+            TextEditWindow textEditWindow = new TextEditWindow(@"Edit recuring task", @"Enter new task name", taskVM.Description);
+            if (textEditWindow.ShowDialog().Value)
+            {
+                taskVM.Description = textEditWindow.InputText;
             }
         }
 

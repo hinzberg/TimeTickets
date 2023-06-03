@@ -6,6 +6,7 @@ A simple time tracking app written in C'# / Windows Presentation Foundation (WPF
 * Manually edit the task time
 
 ##### Done
+* 2023-06-03 Save and Load Recuring Task List
 * 2023-05-30 Improved Styles
 * 2023-03-12 Added ListBoxItemStyle
 * 2023-03-12 Replaced Pause and Resume Buttons with one Button

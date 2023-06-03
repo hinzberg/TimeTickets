@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TimeTickets"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Time Tickets" Height="480" Width="830">
+        Title="Time Tickets" Height="480" Width="830" MinWidth="300" MinHeight="300">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -95,7 +95,7 @@
         <Grid Grid.Row="3">
             <Border BorderBrush="CornflowerBlue" BorderThickness="0,1,0,0" SnapsToDevicePixels="True">
                 <DockPanel Style="{StaticResource ButtonBarDockPanelStyle}">
-                    <TextBlock Style="{StaticResource HeaderStyle}" Margin="10,10,0,0" Text="{Binding Path=TotalDurationTime}"/>
+                    <TextBlock Style="{StaticResource HeaderStyle}" Margin="10,0,0,0" VerticalAlignment="Center" Text="{Binding Path=TotalDurationTime}"/>
                 </DockPanel>
             </Border>
         </Grid>
