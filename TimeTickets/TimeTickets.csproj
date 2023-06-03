@@ -37,6 +37,7 @@
     <ApplicationIcon>timeicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -60,6 +61,10 @@
     <Compile Include="CustomControls\WindowOkButtonUserControl.xaml.cs">
       <DependentUpon>WindowOkButtonUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomWindows\TextEditComboBoxWindow.xaml.cs">
+      <DependentUpon>TextEditComboBoxWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomWindows\TextEditComboBoxWindowViewModel.cs" />
     <Compile Include="Day+Ticket\DayRepository.cs" />
     <Compile Include="HelperClasses\StringExtensions.cs" />
     <Compile Include="HelperClasses\Time.cs" />
@@ -95,6 +100,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CustomWindows\TextEditComboBoxWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -112,6 +121,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\ButtonStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ColorsDefinition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ComboBoxStyleDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

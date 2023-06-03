@@ -31,7 +31,14 @@
         <Setter Property="BorderBrush" Value="CornflowerBlue"/>
         <Setter Property="Height" Value="25"/>
     </Style>
-    
+
+    <Style TargetType="ComboBox" x:Key="ComboBoxStyle">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="12pt"/>
+        <Setter Property="BorderBrush" Value="CornflowerBlue"/>
+        <Setter Property="Height" Value="25"/>
+    </Style>
+
     <Style TargetType="DockPanel" x:Key="ButtonBarDockPanelStyle">
         <Setter Property="Background" Value="#f0f0f8"/>
     </Style>
@@ -83,25 +90,5 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-
-
-    <!--<Style x:Key="ListBoxStyle" TargetType="{x:Type ListBox}">
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="BorderThickness"  Value="0"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Grid>
-                        <Border BorderBrush="Red" BorderThickness="1" Background="White"/>
-                        <ItemsPresenter/>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>-->
-
-
-
 
 </ResourceDictionary>

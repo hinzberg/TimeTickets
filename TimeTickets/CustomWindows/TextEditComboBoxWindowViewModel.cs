@@ -3,9 +3,9 @@ using System.Windows;
 using System.Windows.Input;
 using WPFToolkit;
 
-namespace TimeTickets
+namespace TimeTickets.CustomWindows
 {
-    public class TextEditWindowViewModel : ViewModelBase
+    class TextEditComboBoxWindowViewModel : ViewModelBase
     {
         private Window _window;
 
@@ -47,13 +47,16 @@ namespace TimeTickets
                 OnPropertyChanged();
             }
         }
-        
-        public TextEditWindowViewModel(Window window, string windowTitle, string labelText, string inputText)
+
+        public List<string> ComboBoxContent { get; set; }
+
+        public TextEditComboBoxWindowViewModel(Window window, string windowTitle, string labelText, string inputText, List<string> comboBoxContent)
         {
             _windowTitle = windowTitle;
             _inputText = inputText;
             _labelText = labelText;
-            _window = window;            
+            _window = window;
+            ComboBoxContent = comboBoxContent;
         }
 
         private void CancelWindowAction()

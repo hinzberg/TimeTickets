@@ -1,0 +1,164 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ColorsDefinition.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--Callout background-->
+    <SolidColorBrush x:Key="DefaultComboBoxDropDownBackground" Color="Transparent"/>
+
+    <ControlTemplate x:Key="CustomComboBox" TargetType="{x:Type ComboBox}">
+        <Grid>
+            <ToggleButton x:Name="ToggleButton"
+                        Template="{DynamicResource ComboBoxToggleButton}"
+                        Grid.Column="2"
+                        Focusable="false"
+                        ClickMode="Press"
+                        IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, 
+              RelativeSource={RelativeSource TemplatedParent}}"/>
+
+            <ContentPresenter x:Name="ContentSite"
+                            IsHitTestVisible="False"
+                            Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                            Margin="3,3,23,3"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Left"/>
+
+            <TextBox x:Name="PART_EditableTextBox"
+                   Style="{x:Null}"
+                   Template="{DynamicResource ComboBoxTextBox}"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   Margin="3,3,23,3"
+                   Focusable="True"
+                   Background="{StaticResource ComboBoxPartEditableTextBoxColor}"
+                   Visibility="Visible"
+                   IsReadOnly="{TemplateBinding IsReadOnly}" />
+
+            <Popup x:Name="Popup"
+                 Placement="Bottom"
+                 IsOpen="{TemplateBinding IsDropDownOpen}"
+                 AllowsTransparency="True"
+                 Focusable="False"
+                 PopupAnimation="Slide">
+
+                <Grid x:Name="DropDown"
+                  SnapsToDevicePixels="True"
+                  MinWidth="{TemplateBinding ActualWidth}"
+                  MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                    Background="{StaticResource DefaultComboBoxDropDownBackground}">
+
+                    <Border x:Name="DropDownBorder" BorderThickness="1" 
+                            Background="{StaticResource ComboBoxDropDownBorderBackground}"
+                            BorderBrush="{StaticResource PrimaryBrush}"/>
+
+                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                    </ScrollViewer>
+                </Grid>
+            </Popup>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="HasItems" Value="false">
+                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95" />
+            </Trigger>
+
+            <Trigger Property="IsGrouping" Value="true">
+                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+            </Trigger>
+
+            <Trigger SourceName="Popup" Property="AllowsTransparency" Value="true">
+                <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="2" />
+                <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+
+            <Border x:Name="Border"  Grid.ColumnSpan="2" CornerRadius="2"  BorderThickness="1"
+                    BorderBrush="{StaticResource PrimaryBrush}"
+                    Background="{StaticResource PrimaryBrush}"/>
+
+
+            <Border Grid.Column="0" CornerRadius="0,0,0,0" Margin="1" >
+                <Border.Background>
+                    <SolidColorBrush Color="{StaticResource ComboBoxToggleButtonInnerItemBackground}"/>
+                </Border.Background>
+            </Border>
+
+            <GridSplitter x:Name="Splitter" Grid.Column="0" Width="1" Margin="0,3,0,3" Background="{StaticResource PrimaryBrush}"/>
+
+            <Path x:Name="Arrow" Grid.Column="1" HorizontalAlignment="Center"
+                  VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z" >
+                <Path.Fill>
+                    <SolidColorBrush Color="{StaticResource ComboBoxArrowColor}"/>
+                </Path.Fill>
+            </Path>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource SecondaryBrush}" />
+            </Trigger>
+            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource PrimaryBrush}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource EnabledBrush}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource EnabledBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource EnabledBrush}"/>
+                <Setter TargetName="Arrow" Property="Fill" Value="{StaticResource SecondaryEnabledBrush}" />
+                <Setter TargetName="Splitter" Property="Background" Value="{StaticResource EnabledBrush}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+        <Border x:Name="PART_ContentHost" Focusable="False"  Background="{TemplateBinding Background}"  />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="CustomComboBoxItem" TargetType="{x:Type ComboBoxItem}">
+        <Border x:Name="ContentBorder" Padding="2" SnapsToDevicePixels="true" Background="{TemplateBinding Background}">
+            <ContentPresenter Margin="4" x:Name="HeaderContainer"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter TargetName="ContentBorder" Property="Background" Value="{StaticResource SecondaryBrush}" />
+                <Setter TargetName="ContentBorder" Property="CornerRadius" Value="0"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="14px"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.CanContentScroll"   Value="true" />
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Template" Value="{StaticResource CustomComboBox}"/>
+
+    </Style>
+
+    <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="14px"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template" Value="{StaticResource CustomComboBoxItem}"/>
+    </Style>
+
+
+</ResourceDictionary>

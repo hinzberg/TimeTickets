@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Threading;
+using TimeTickets.CustomWindows;
 using TimeTickets.RecuringTasks;
 using TimeTickets.TimeTicket;
 using WPFToolkit;
@@ -121,7 +122,8 @@ namespace TimeTickets
 
         private void RenameAction()
         {
-            TextEditWindow window = new TextEditWindow("Rename Task", "Enter new task name", SelectedTimeTicketVM.Description);
+            var recuringTasksDescriptions = RepositoryCollection.Instance.RecuringTasksRepository.RecuringTasks.Select(a => a.Description).ToList();
+            TextEditComboBoxWindow window = new TextEditComboBoxWindow("Rename Task", "Enter new task name", SelectedTimeTicketVM.Description, recuringTasksDescriptions);
             if (window.ShowDialog().Value)
             {
                 SelectedTimeTicketVM.Description = window.InputText;
